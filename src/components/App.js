@@ -6,8 +6,14 @@ import Leaderboard from './Leaderboard';
 import QuestionPage from './QuestionPage';
 import NewQuestion from './NewQuestion';
 import Login from './Login';
+import { connect } from 'react-redux';
+import { handleInitialData } from '../actions/shared';
 
 class App extends Component {
+  componentDidMount() {
+    this.props.dispatch(handleInitialData());
+  }
+
   render() {
     return (
       <Router>
@@ -24,4 +30,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default connect()(App);

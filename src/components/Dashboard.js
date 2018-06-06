@@ -1,7 +1,22 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
-const Dashboard = () => (
-    <div>Dashboard</div>
-);
+class Dashboard extends Component {
+  render() {
+    console.log(this.props);
+    return (
+      <div>
+        Dashboard
+      </div>
+    )
+  }
+}
 
-export default Dashboard;
+function mapStateToProps( { questions }) {
+  return {
+    questionIds: Object.keys(questions)
+      .sort((a,b) => questions[b].timestamp - questions[a].timestamp)
+  }
+}
+
+export default connect(mapStateToProps)(Dashboard);
