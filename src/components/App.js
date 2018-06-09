@@ -19,15 +19,25 @@ class App extends Component {
       <Router>
         <div>
           <Navbar />
-          <Route path='/' exact component={Dashboard} />
-          <Route path='/add' component={NewQuestion} />
-          <Route path='/leaderboard' component={Leaderboard} />
-          <Route path='/login' component={Login} />
-          <Route path='/question/:id' component={QuestionPage} />
+          {
+            this.props.loading === true
+              ? null
+              : <Route path='/' exact component={Dashboard} />
+          }
+            <Route path='/leaderboard' component={Leaderboard} />
+            <Route path='/add' component={NewQuestion} />
+            <Route path='/login' component={Login} />
+            <Route path='/question/:id' component={QuestionPage} />
         </div>
       </Router>
     );
   }
 }
 
-export default connect()(App);
+function mapStateToProps ({ authedUser }) {
+  return {
+    loading: authedUser === null
+  }
+}
+
+export default connect(mapStateToProps)(App);
