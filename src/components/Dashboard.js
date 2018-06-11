@@ -3,18 +3,37 @@ import { connect } from 'react-redux';
 import Question from './Question';
 
 class Dashboard extends Component {
+
+  state = {
+    showAnsweredQuestions: false
+  }
+
+  handleToggle = () => {
+    this.setState({
+      showAnsweredQuestions: !this.state.showAnsweredQuestions
+    })
+  }
+
   render() {
     console.log(this.props);
     return (
       <div className='content'>
-        <h2>Questions Unanswered</h2>
-        <ul>
-          {this.props.questionIdsUnanswered.map((id) => <li key={id}><Question id={id} /></li>)}
-        </ul>
-        <h2>Questions Answered</h2>
-        <ul>
-          {this.props.questionIdsAnswered.map((id) => <li key={id}><Question id={id} /></li>)}
-        </ul>
+        { !this.state.showAnsweredQuestions ?
+          <div>
+            <h2>Questions Unanswered</h2>
+            <ul>
+              {this.props.questionIdsUnanswered.map((id) => <li key={id}><Question id={id} /></li>)}
+            </ul>
+          </div>
+          :
+          <div>
+            <h2>Questions Answered</h2>
+            <ul>
+              {this.props.questionIdsAnswered.map((id) => <li key={id}><Question id={id} /></li>)}
+            </ul>
+          </div>
+        }
+        <button onClick={this.handleToggle}>Toogle It</button>
       </div>
     )
   }
