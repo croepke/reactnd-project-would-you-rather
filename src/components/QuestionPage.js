@@ -1,7 +1,27 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
-const QuestionPage = () => (
-    <div>Question page</div>
-);
+class QuestionPage extends Component {
+  render() {
+    return (
+      <div>
+        <div>Would you rather ...</div>
+        <div>{this.props.question.optionOne.text}</div>
+        <div>{this.props.question.optionTwo.text}</div>
+      </div>
+    )
+  }
+};
 
-export default QuestionPage;
+function mapStateToProps({ authedUser, questions, users }, props) {
+  const { id } = props.match.params;
+  const question = questions[id];
+  console.log(questions);
+
+  return {
+    id,
+    question
+  }
+}
+
+export default connect(mapStateToProps)(QuestionPage);
