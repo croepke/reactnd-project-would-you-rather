@@ -1,11 +1,18 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { handleQuestionVote } from '../actions/questions';
 
 class QuestionPage extends Component {
 
-  handleVote(e) {
+  handleVote(e, option) {
     e.preventDefault();
-    alert("YES");
+    console.log(e)
+    const { dispatch, question, authedUser } = this.props;
+    dispatch(handleQuestionVote({
+      authedUser,
+      qid: question.id,
+      answer: option
+    }));
   }
 
   render() {
@@ -22,7 +29,7 @@ class QuestionPage extends Component {
         <h1>Would you rather ...</h1>
         <div className='columns'>
           <div className='column'>
-            <div onClick={(e) => this.handleVote(e)} className={'button ' + (question.optionOne.votes.includes(authedUser) ? 'option-selected' : '')}>
+            <div onClick={(e) => this.handleVote(e, "optionOne")} className={'button ' + (question.optionOne.votes.includes(authedUser) ? 'option-selected' : '')}>
               {question.optionOne.text}
             </div>
             { answered ?
@@ -36,7 +43,7 @@ class QuestionPage extends Component {
             or
           </div>
           <div className='column'>
-            <div onClick={(e) => this.handleVote(e)} className={'button ' + (question.optionTwo.votes.includes(authedUser) ? 'option-selected' : '')}>
+            <div onClick={(e) => this.handleVote(e, "optionTwo")} className={'button ' + (question.optionTwo.votes.includes(authedUser) ? 'option-selected' : '')}>
               {question.optionTwo.text}
             </div>
             { answered ?
