@@ -3,11 +3,16 @@ import { connect } from 'react-redux';
 
 class QuestionPage extends Component {
 
+  handleVote(e) {
+    e.preventDefault();
+    alert("YES");
+  }
+
   render() {
 
-    const { question, author, authedUser }  = this.props;
+    const { id, question, author, users, authedUser }  = this.props;
     const voteTotal = question.optionOne.votes.length + question.optionTwo.votes.length;
-
+    const answered = Object.keys(users[authedUser].answers).includes(id);
     return (
       <div className='content'>
         <div>Question asked by: {author.name}</div>
@@ -17,20 +22,29 @@ class QuestionPage extends Component {
         <h1>Would you rather ...</h1>
         <div className='columns'>
           <div className='column'>
-            <div className={'box ' + (question.optionOne.votes.includes(authedUser) ? 'option-selected' : '')}>
+            <div onClick={(e) => this.handleVote(e)} className={'button ' + (question.optionOne.votes.includes(authedUser) ? 'option-selected' : '')}>
               {question.optionOne.text}
             </div>
-            <div>
-              Votes: {question.optionOne.votes.length}, { ((question.optionOne.votes.length / voteTotal) * 100).toPrecision(3) }%
-            </div>
+            { answered ?
+              <div>
+                Votes: {question.optionOne.votes.length}, { ((question.optionOne.votes.length / voteTotal) * 100).toPrecision(3) }%
+              </div>
+              : null
+            }
           </div>
           <div className='column'>
-            <div className={'box ' + (question.optionTwo.votes.includes(authedUser) ? 'option-selected' : '')}>
+            or
+          </div>
+          <div className='column'>
+            <div onClick={(e) => this.handleVote(e)} className={'button ' + (question.optionTwo.votes.includes(authedUser) ? 'option-selected' : '')}>
               {question.optionTwo.text}
             </div>
-            <div>
-              Votes: {question.optionTwo.votes.length}, { ((question.optionTwo.votes.length / voteTotal) * 100).toPrecision(3) }%
-            </div>
+            { answered ?
+              <div>
+                Votes: {question.optionTwo.votes.length}, { ((question.optionTwo.votes.length / voteTotal) * 100).toPrecision(3) }%
+              </div>
+              : null
+            }
           </div>
         </div>
       </div>
@@ -46,6 +60,7 @@ function mapStateToProps({ authedUser, questions, users }, props) {
   return {
     id,
     authedUser,
+    users,
     question,
     author
   }
