@@ -6,8 +6,11 @@ class QuestionPage extends Component {
 
   handleVote(e, option) {
     e.preventDefault();
-    console.log(e)
-    const { dispatch, question, authedUser } = this.props;
+    const { dispatch, question, authedUser, users } = this.props;
+    if(Object.keys(users[authedUser].answers).includes(question.id)) {
+      alert("Sorry, you already answered this question before.");
+      return;
+    }
     dispatch(handleQuestionVote({
       authedUser,
       qid: question.id,
