@@ -8,7 +8,7 @@ class Question extends Component {
     return (
       <div>
         <Link to={`/question/${this.props.question.id}`}>
-          Would you rather {this.props.question.optionOne.text} or {this.props.question['optionTwo']['text']}
+          Would you rather {this.props.question.optionOne.text} or {this.props.question['optionTwo']['text']}?
         </Link>
       </div>
     )

@@ -29,10 +29,10 @@ class QuestionPage extends Component {
         <figure className="image is-96x96">
           <img src={author.avatarURL} alt={author.name}></img>
         </figure>
-        <h1>Would you rather ...</h1>
+        <h1>Would you rather ... ?</h1>
         <div className='columns'>
-          <div className='column'>
-            <div onClick={(e) => this.handleVote(e, "optionOne")} className={'button ' + (question.optionOne.votes.includes(authedUser) ? 'option-selected' : '')}>
+          <div className='column is-narrow'>
+            <div onClick={(e) => this.handleVote(e, "optionOne")} className={'button ' + (question.optionOne.votes.includes(authedUser) ? 'is-primary' : '')}>
               {question.optionOne.text}
             </div>
             { answered ?
@@ -42,11 +42,11 @@ class QuestionPage extends Component {
               : null
             }
           </div>
-          <div className='column'>
+          <div className='column is-narrow'>
             or
           </div>
-          <div className='column'>
-            <div onClick={(e) => this.handleVote(e, "optionTwo")} className={'button ' + (question.optionTwo.votes.includes(authedUser) ? 'option-selected' : '')}>
+          <div className='column is-narrow'>
+            <div onClick={(e) => this.handleVote(e, "optionTwo")} className={'button ' + (question.optionTwo.votes.includes(authedUser) ? 'is-primary' : '')}>
               {question.optionTwo.text}
             </div>
             { answered ?
