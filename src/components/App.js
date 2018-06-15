@@ -23,7 +23,7 @@ class App extends Component {
             this.props.loading === true
               ? null
               :
-              <div>
+              <div className='section'>
                 <Route path='/' exact component={Dashboard} />
                 <Route path='/leaderboard' component={Leaderboard} />
                 <Route path='/add' component={NewQuestion} />
