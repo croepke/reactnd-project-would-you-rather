@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Question from './Question';
-import { Redirect } from 'react-router-dom';
 
 class Dashboard extends Component {
 
@@ -16,9 +15,8 @@ class Dashboard extends Component {
   }
 
   render() {
-    console.log("OK");
     return (
-        <div>
+        <div className='container'>
           { !this.state.showAnsweredQuestions ?
             <div>
               <div className='content'>
@@ -38,7 +36,8 @@ class Dashboard extends Component {
               </ul>
             </div>
           }
-          <button className='button is-warning' onClick={this.handleToggle}>Toogle It</button>
+          <br />
+          <button className='button is-warning' onClick={this.handleToggle}>Switch questions</button>
         </div>
     )
   }

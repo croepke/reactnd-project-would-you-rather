@@ -6,7 +6,7 @@ class Leaderboard extends Component { 
 
   render() {
     return (
-      <div className='content'>
+      <div className='content container'>
         <h1>Leaderboard</h1>
         {this.props.userIds.map((id) => <LeaderboardEntry key={id} id={id} />)}
       </div>
@@ -21,7 +21,6 @@ function mapStateToProps({users}) {
         (Object.keys(users[b].answers).length+users[b].questions.length)-
         (Object.keys(users[a].answers).length+users[a].questions.length))
     );
-  console.log(userIds);
   return {
     userIds
   }

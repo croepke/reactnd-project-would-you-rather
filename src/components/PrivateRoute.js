@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 const PrivateRoute = ({ component: Component, authedUser, ...rest }) => (
   <Route {...rest} render={(props) => (
-     authedUser
+     authedUser !==null
       ? <Component {...props} />
       : <Redirect to={{
           pathname: '/login',
@@ -13,4 +13,10 @@ const PrivateRoute = ({ component: Component, authedUser, ...rest }) => (
   )} />
 )
 
-export default PrivateRoute;
+function mapStateToProps( { authedUser }) {
+  return {
+    authedUser
+  }
+}
+
+export default withRouter(connect(mapStateToProps)(PrivateRoute));

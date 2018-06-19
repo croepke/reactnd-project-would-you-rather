@@ -30,7 +30,7 @@ class NewQuestion extends Component {
   handleSubmit = (e) => {
     e.preventDefault();
     const { optionOne, optionTwo } = this.state;
-    const { dispatch, authedUser } = this.props;
+    const { dispatch } = this.props;
 
     dispatch(handleAddQuestion(optionOne, optionTwo));
 
@@ -44,7 +44,7 @@ class NewQuestion extends Component {
   render() {
     const { optionOne, optionTwo, toHome } = this.state;
 
-    if(toHome == true) {
+    if(toHome === true) {
       return <Redirect to='/' />
     }
 

@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 
 class Question extends Component {
   render() {
-    console.log(this.props);
     return (
       <div>
         <Link to={`/question/${this.props.question.id}`}>

@@ -9,7 +9,6 @@ export default function users(state={}, action) {
         ...action.users
       }
     case QUESTION_VOTE:
-      const vote = { }
       return {
         ...state,
         [action.authedUser]: {
