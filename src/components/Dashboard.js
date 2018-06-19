@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Question from './Question';
+import { Redirect } from 'react-router-dom';
 
 class Dashboard extends Component {
 
@@ -15,30 +16,30 @@ class Dashboard extends Component {
   }
 
   render() {
-    console.log(this.props);
+    console.log("OK");
     return (
-      <div>
-        { !this.state.showAnsweredQuestions ?
-          <div>
-            <div className='content'>
-              <h2>Questions Unanswered</h2>
+        <div>
+          { !this.state.showAnsweredQuestions ?
+            <div>
+              <div className='content'>
+                <h2>Questions Unanswered</h2>
+              </div>
+              <ul>
+                {this.props.questionIdsUnanswered.map((id) => <li key={id}><Question id={id} /></li>)}
+              </ul>
             </div>
-            <ul>
-              {this.props.questionIdsUnanswered.map((id) => <li key={id}><Question id={id} /></li>)}
-            </ul>
-          </div>
-          :
-          <div>
-            <div className='content'>
-              <h2>Questions Answered</h2>
+            :
+            <div>
+              <div className='content'>
+                <h2>Questions Answered</h2>
+              </div>
+              <ul>
+                {this.props.questionIdsAnswered.map((id) => <li key={id}><Question id={id} /></li>)}
+              </ul>
             </div>
-            <ul>
-              {this.props.questionIdsAnswered.map((id) => <li key={id}><Question id={id} /></li>)}
-            </ul>
-          </div>
-        }
-        <button className='button is-warning' onClick={this.handleToggle}>Toogle It</button>
-      </div>
+          }
+          <button className='button is-warning' onClick={this.handleToggle}>Toogle It</button>
+        </div>
     )
   }
 }
