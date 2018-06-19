@@ -2,6 +2,9 @@ import React from 'react';
 import { Redirect, Route, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
+
+// See: https://tylermcginnis.com/react-router-protected-routes-authentication/
+
 const PrivateRoute = ({ component: Component, authedUser, ...rest }) => (
   <Route {...rest} render={(props) => (
      authedUser !==null
